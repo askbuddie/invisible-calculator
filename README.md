@@ -1,8 +1,3 @@
-# invisiblecalc
+# Invisible Calculator
 
-## an invisible calculator for flutter
-
-# <a href="https://bit.ly/sidtubesub" >Contributer </a>
-
-
-
+<a href="https://github.com/cimplesid" target="_blank"> Primary Contributor </a>
