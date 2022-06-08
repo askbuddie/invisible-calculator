@@ -1,111 +1,98 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'calculator',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Calc(),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'calculator',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const Calc(),
+      );
 }
 
 class Calc extends StatefulWidget {
+  const Calc({Key key}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<Calc> createState() => _CalcState();
 }
 
-class _MyHomePageState extends State<Calc> {
-  Widget button(String buttonText) {
-    return Expanded(
-      child: OutlineButton(
-        padding: EdgeInsets.all(24.0),
-        highlightedBorderColor: Colors.green,
-        child: Text(
-          buttonText,
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-        ),
-        onPressed: () => buttonPressed(buttonText),
-      ),
-    );
-  }
-
+class _CalcState extends State<Calc> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-      ),
-      body: Container(
-        color: Colors.black,
-        child: Column(
-          children: <Widget>[
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
-              child: Text(
-                output,
-                style: TextStyle(
-                  fontSize: 48.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+        ),
+        body: Container(
+          color: Colors.black,
+          child: Column(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.symmetric(
+                    vertical: 24.0, horizontal: 12.0),
+                child: Text(
+                  output,
+                  style: const TextStyle(
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Divider(),
-            ),
-            //layout starts here
-
-            Column(children: [
-              Row(children: [
-                button("/"),
-                button("7"),
-                button("8"),
-                button("9"),
-              ]),
-              Row(children: [
-                button("X"),
-                button("4"),
-                button("5"),
-                button("6"),
-              ]),
-              Row(children: [
-                button("-"),
-                button("1"),
-                button("2"),
-                button("3"),
-              ]),
-              Row(
-                children: [
-                  button("+"),
-                  button("0"),
-                  button("."),
-                  button("C"),
-                ],
+              const Expanded(
+                child: Divider(),
               ),
-              Row(
-                children: [
-                  button("%"),
-                  button("AC"),
-                  button("="),
-                ],
-              )
-            ])
-          ],
+              //layout starts here
+
+              Column(children: [
+                Row(children: [
+                  button("/"),
+                  button("7"),
+                  button("8"),
+                  button("9"),
+                ]),
+                Row(children: [
+                  button("X"),
+                  button("4"),
+                  button("5"),
+                  button("6"),
+                ]),
+                Row(children: [
+                  button("-"),
+                  button("1"),
+                  button("2"),
+                  button("3"),
+                ]),
+                Row(
+                  children: [
+                    button("+"),
+                    button("0"),
+                    button("."),
+                    button("C"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    button("%"),
+                    button("AC"),
+                    button("="),
+                  ],
+                )
+              ])
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   buttonPressed(String buttonText) {
-//main logic function of app
+    //main logic function of app
     if (buttonText == "AC" || buttonText == "C") {
       solution = "0";
       x = 0.0;
@@ -159,6 +146,28 @@ class _MyHomePageState extends State<Calc> {
     setState(() {
       output = double.parse(solution).toStringAsFixed(2);
     });
+  }
+
+  Widget button(String buttonText) {
+    return Expanded(
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.all(24.0),
+          side: const BorderSide(
+            color: Colors.green,
+            width: 0.9,
+          ),
+        ),
+        child: Text(
+          buttonText,
+          style: const TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        onPressed: () => buttonPressed(buttonText),
+      ),
+    );
   }
 
 //init..
